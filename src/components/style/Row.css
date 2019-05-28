@@ -1,0 +1,21 @@
+.row{
+	padding: 10px 40px;
+	display: flex;
+	flex-direction: row;
+}
+.row li{
+	display: inline-block;
+}
+.guessed{
+	background-color: #ddd;
+	opacity: .7;
+}
+.answers{
+	/*background-color: pink;*/
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 40px;
+	height: 40px;
+	margin: 0 0 0 10px;
+}

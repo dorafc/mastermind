@@ -1,0 +1,8 @@
+.peg{
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  /*background-color: red;*/
+  margin: 0 10px 0 0;
+  border-radius: 100%;
+}
