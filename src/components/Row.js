@@ -10,7 +10,7 @@ class Row extends Component {
       iterators : this.props.iterators,
       inPlay : this.props.inPlay,
       guessed : this.props.guessed,
-      answers : [0,1,2,2]
+      answers : this.props.answers,
     };
   }
 
@@ -68,30 +68,17 @@ class Row extends Component {
   render() {
   	const pegs = this.renderPegs()
 	  const answers = this.responsePegs()
-
-  	if (this.state.guessed){
-  		return(
-	  		<div 
-	  			className="row guessed"
-	  		>
-	  			{pegs}
-	  			<div className="answers">
-		  			{answers}
-	  			</div>
-	  		</div>
-	  	)
-  	} else {
-  		return(
-	  		<div 
-	  			className="row"
-	  		>
-	  			{pegs}
-	  			<div className="answers">
-		  			{answers}
-	  			</div>	
-	  		</div>
-	  	)
-  	}
+	  const rowClass = (this.state.guessed ? "row guessed" : "row")
+		return(
+  		<div 
+  			className={rowClass}
+  		>
+  			{pegs}
+  			<div className="answers">
+	  			{answers}
+  			</div>
+  		</div>
+  	)
   }
 }
 export default Row;
