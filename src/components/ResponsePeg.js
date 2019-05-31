@@ -5,7 +5,7 @@ class ResponsePeg extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      colors: ['grey', 'black', '#eeeeee'],
+      colors: ['none', 'black', '#eeeeee'],
     };
   }
 

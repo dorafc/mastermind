@@ -10,7 +10,7 @@ class Game extends Component {
     this.state = {
     	answer : this.compyGuess(),
     	playRow : 0,
-      rows : Array(5).fill(0),
+      rows : Array(10).fill(0),
       // answers : Array(5).fill([0,0,0,0])
     };
   }
@@ -45,6 +45,11 @@ class Game extends Component {
 	 //  	)
   // }
 
+  guessGame(){
+  	const newPlayRow = this.state.playRow + 1
+  	this.setState({playRow: newPlayRow})
+  }
+
 
   renderRow(index){
   	return (
@@ -53,7 +58,8 @@ class Game extends Component {
   			row = {index}
 				inPlay = {this.state.playRow === index}
 				guessed = {index < this.state.playRow}
-				answer = {this.state.guess}
+				answer = {this.state.answer}
+				clickBtn = {() => this.guessGame()}
 			/>
   	)
   }

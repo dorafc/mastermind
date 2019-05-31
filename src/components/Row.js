@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './style/Row.css';
 import Peg from './Peg';
 import ResponsePeg from './ResponsePeg';
+import GuessBtn from './GuessBtn';
 
 class Row extends Component {
   constructor(props) {
@@ -19,15 +20,38 @@ class Row extends Component {
   	this.setState({iterators: iterators})
   }
 
+  checkPeg(iterator, index){
+    let answer = 0;
+    if(this.props.answer[index] === (iterator % 6)){
+      answer = 1;
+    } else if (this.props.answer.includes(iterator % 6)){
+      answer = 2
+    }
+    return (
+      <ResponsePeg 
+        key = {"peg"+index}
+        iterator = {answer}
+      />
+    )
+  }
+
   responsePegs(){
-  	if (this.props.guessed){
-  		return (this.props.answers.map((answer, index) =>
-	  		<ResponsePeg 
-	  			key = {index}
-					iterator = {answer}
-				/>
-			))
-  	}
+  	if (this.props.guessed) {
+      const answers = this.state.iterators.map((answer, index) =>
+        this.checkPeg(answer, index)
+      )
+  		return (
+        <div className="answers">
+          {answers}
+        </div>
+      )
+  	} else if (this.props.inPlay){
+      return (
+        <GuessBtn 
+          onClick = {() => this.props.clickBtn()}
+        />
+      )
+    }
   }
 
   renderPegs(){
@@ -65,14 +89,16 @@ class Row extends Component {
 
   render() {
   	const pegs = this.renderPegs()
-	  // const answers = this.responsePegs()
-    
+	  const guess = this.responsePegs()
+
 	  const rowClass = (this.props.guessed ? "row guessed" : "row")
 		return(
   		<div 
   			className={rowClass}
   		>
         {pegs}
+        {guess}
+
   		</div>
   	)
   }
