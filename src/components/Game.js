@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import './style/Game.css';
 import Row from './Row';
-// import Peg from './Peg';
+import Answers from './Answers';
 
 class Game extends Component {
 
 	constructor(props) {
     super(props);
     this.state = {
-    	guess : this.compyGuess(),
+    	answer : this.compyGuess(),
     	playRow : 0,
       rows : Array(5).fill(0),
       // answers : Array(5).fill([0,0,0,0])
@@ -78,7 +78,10 @@ class Game extends Component {
 
 		return (
 			<div className="board">
-				<div className="compyAnswer">
+				<div className="compyAnswer row">
+					<Answers 
+						answer = {this.state.answer}
+					/>
 				</div>
 				<div className="game">
 					{rows}
