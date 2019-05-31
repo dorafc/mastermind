@@ -5,16 +5,17 @@ class Peg extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      colors: ['red', 'orange', 'yellow', 'green', 'blue', 'purple'],
+      // colors: ['red', 'orange', 'yellow', 'green', 'blue', 'purple'],
     };
   }
 
   render() {
+  	const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple']
   	if (this.props.inPlay){
   		return (
 	    	<div 
 		      className="peg" 
-		      style={{backgroundColor:this.state.colors[this.props.iterator % this.state.colors.length]}}
+		      style={{backgroundColor:colors[this.props.iterator % colors.length]}}
 		      onClick={() => this.props.onClick()}
 		    >
 	      </div>
@@ -23,7 +24,7 @@ class Peg extends Component {
   		return (
 				<div 
 		      className="peg" 
-		      style={{backgroundColor:this.state.colors[this.props.iterator % this.state.colors.length]}}
+		      style={{backgroundColor:colors[this.props.iterator % colors.length]}}
 		    >
 		    </div>
   		)

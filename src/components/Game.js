@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './style/Game.css';
 import Row from './Row';
+// import Peg from './Peg';
 
 class Game extends Component {
 
@@ -8,23 +9,51 @@ class Game extends Component {
     super(props);
     this.state = {
     	guess : this.compyGuess(),
-      rows : [[0,1,2,3],[5,2,3,4]],
-      answers : [[0,1,2,2],[0,1,1,2]]
+    	playRow : 0,
+      rows : Array(5).fill(0),
+      // answers : Array(5).fill([0,0,0,0])
     };
   }
 
-  renderRow(index){
-  	const isPlay = (index === this.state.rows.length)
-  	const isGuessed = (index < this.state.rows.length)
-  	const iterator = (!isGuessed) ? [0,0,0,0] : this.state.rows[index]
+	// updateIterator(i){
+ //  	const iterators = this.state.rows[this.state.playRow].slice()
+ //  	iterators[i] = iterators[i]+1
 
+ //  	const newRows = this.state.rows.map((x,index)=>(this.state.playRow===index) ? iterators : x)
+
+ //  	this.setState({rows: newRows})
+ //  }
+
+  // renderPegs(rowCount){
+  // 	const row = (rowCount >= 0) ? this.state.rows[rowCount] : this.state.guess
+  // 	const inPlay = (this.state.playRow === rowCount)
+  // 	const isGuessed = ((this.state.playRow > rowCount) || (rowCount === -1))
+
+		// return (
+  // 			row.map((iterator, index) => 
+		//   		<li
+		//   			key={"peg" + index + "row" + rowCount}
+		//   		>
+		// 	  		<Peg 
+		// 					inPlay={inPlay}
+		// 					guessed={isGuessed} 
+		// 					iterator={iterator}
+		// 					onClick = {() => this.updateIterator(index)}
+		// 				/>
+		// 			</li>
+		//   	)
+	 //  	)
+  // }
+
+
+  renderRow(index){
   	return (
   		<Row
-  			key = {index}
-				inPlay = {isPlay}
-				guessed = {isGuessed}
-				iterators = {iterator}
-				answers = {this.state.answers[index]}
+  			key = {"row"+index}
+  			row = {index}
+				inPlay = {this.state.playRow === index}
+				guessed = {index < this.state.playRow}
+				answer = {this.state.guess}
 			/>
   	)
   }
@@ -36,35 +65,27 @@ class Game extends Component {
   }
 
   renderAnswer(){
+  	const answerPegs = this.renderPegs(-1)
   	return (
-  		<Row 
-  			inPlay = {false}
-  			guessed = {true}
-  			iterators = {this.state.guess}
-  			answers = {[]}
-  		/>
+  		<div className="row">
+  			{answerPegs}
+  		</div>
   	)
   }
 
 	render() {
-		const numRows = 5;
-		let rows = []
-		for (let i = 0; i < numRows; i++){
-			rows.push(this.renderRow(i))
-		}
-
-		rows = rows.reverse();
+		const rows = (this.state.rows.map((x,i) => this.renderRow(i))).reverse()
 
 		return (
 			<div className="board">
 				<div className="compyAnswer">
-					{this.renderAnswer()}
 				</div>
 				<div className="game">
 					{rows}
 				</div>
 			</div>
-		)
+		) 
+
 	}
 }
 

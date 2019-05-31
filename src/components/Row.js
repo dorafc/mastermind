@@ -7,10 +7,8 @@ class Row extends Component {
   constructor(props) {
   	super(props);
     this.state = {
-      iterators : this.props.iterators,
-      inPlay : this.props.inPlay,
-      guessed : this.props.guessed,
-      answers : this.props.answers,
+      iterators : Array(4).fill(0),
+      answers : Array(4).fill(0),
     };
   }
 
@@ -22,8 +20,8 @@ class Row extends Component {
   }
 
   responsePegs(){
-  	if (this.state.guessed){
-  		return (this.state.answers.map((answer, index) =>
+  	if (this.props.guessed){
+  		return (this.props.answers.map((answer, index) =>
 	  		<ResponsePeg 
 	  			key = {index}
 					iterator = {answer}
@@ -33,15 +31,15 @@ class Row extends Component {
   }
 
   renderPegs(){
-  	if (this.state.inPlay){
+  	if (this.props.inPlay){
   		return (
   			this.state.iterators.map((iterator, index) => 
 		  		<li
 		  			key={index}
 		  		>
 			  		<Peg 
-							inPlay={this.state.inPlay}
-							guessed={this.state.guessed} 
+							inPlay={this.props.inPlay}
+							guessed={this.props.guessed} 
 							iterator={iterator}
 							onClick = {() => this.updateIterator(index)}
 						/>
@@ -55,8 +53,8 @@ class Row extends Component {
 		  			key={index}
 		  		>
 			  		<Peg 
-							inPlay={this.state.inPlay}
-							guessed={this.state.guessed} 
+							inPlay={this.props.inPlay}
+							guessed={this.props.guessed} 
 							iterator={iterator}
 						/>
 					</li>
@@ -67,16 +65,14 @@ class Row extends Component {
 
   render() {
   	const pegs = this.renderPegs()
-	  const answers = this.responsePegs()
-	  const rowClass = (this.state.guessed ? "row guessed" : "row")
+	  // const answers = this.responsePegs()
+    
+	  const rowClass = (this.props.guessed ? "row guessed" : "row")
 		return(
   		<div 
   			className={rowClass}
   		>
-  			{pegs}
-  			<div className="answers">
-	  			{answers}
-  			</div>
+        {pegs}
   		</div>
   	)
   }

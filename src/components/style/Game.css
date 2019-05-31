@@ -3,3 +3,19 @@
 	display: block;
 	padding: 40px 0;
 }
+
+.row{
+	padding: 10px 40px;
+	display: flex;
+	flex-direction: row;
+}
+.row li{
+	display: inline-block;
+}
+.guessed{
+	background-color: #ddd;
+	opacity: .7;
+}
+.answers{
+
+}
